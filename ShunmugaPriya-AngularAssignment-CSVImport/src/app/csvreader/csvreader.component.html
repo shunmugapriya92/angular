@@ -1,0 +1,62 @@
+<div class="flex-container">
+<div align="center" style="width:100%">
+
+    <mat-card style="background-color:#E6E6FA;">      
+    <label class="custom-file-upload">
+      <input type="file" #fileImportInput name="File Upload" id="txtFileUpload" (change)="fileChangeListener($event)" accept=".csv" style="background-color:#3f51b5;color: white; "/>
+      Click Here to upload the csv file
+  </label><br><br>
+  <span *ngIf='filename.length>0'>Selected File : {{filename}}</span>
+  </mat-card>
+  
+  </div>
+  <div style="flex-basis: 1500px;" *ngIf='filteredcsvRecords.length>0 || minimalIssue!=unDefined' class="csv-result-table">
+      <mat-card style="background-color:#E6E6FA;">
+          <div align="left">
+          Minimal IssueCount:        
+          <input type="number" #minimalIssuename name="minimalIssue" id="minimalIssue" [(ngModel)]='minimalIssue' [disabled]='filteredcsvRecords.length==0 && minimalIssue==0' style="width: 40px"/>
+        </div>
+          <br>
+          <div style="width: 1250px; background-color:#3f51b5;color: white; ">
+            <div class="table-align" style="height: 30px;">
+              <div style="width: 50px;" align="center">S No</div>
+              <div style="width: 300px;" align="center">First Name</div>
+              <div style="width: 300px;" align="center">Sur Name</div>
+              <div style="width: 300px;" align="center">Issue Count</div>
+              <div style="width: 300px;" align="center">Date Of Birth</div>
+            </div>
+            <div>
+    <table align="center" style="width: 1250px">
+      <!--<thead>
+        <tr>
+          <th>S No</th>
+          <th>First Name</th>
+          <th>Sur Name</th>
+          <th>Issue Count</th>
+          <th>Date Of Birth</th>        
+        </tr>
+      </thead>-->
+      <tbody>
+        <tr *ngFor="let csvData of filteredcsvRecords;let i = index;">
+  
+          <td style="width: 50px;">{{i+1}}</td>
+          <td style="width: 300px;">
+            <span>{{csvData.firstName}}</span>
+          </td>
+          <td style="width: 300px;">
+            <span>{{csvData.surName}}</span>
+          </td>
+          <td style="width: 300px;">
+            <span>{{csvData.issueCount}}</span>
+          </td>
+          <td style="width: 300px;">
+            <span>{{csvData.dateOfBirth}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </div>
+  </mat-card>
+  </div>
+</div>
